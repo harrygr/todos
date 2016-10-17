@@ -5,6 +5,10 @@ defmodule Todos.TodoView do
     Enum.map(todos, &todo_json/1)
   end
 
+  def render("show.json", %{todo: todo}) do
+    todo_json(todo)
+  end
+
   def todo_json(todo) do
     %{
       title: todo.title,
@@ -12,14 +16,5 @@ defmodule Todos.TodoView do
       inserted_at: todo.inserted_at,
       updated_at: todo.updated_at
     }
-  end
-
-  def divide(a ,b)
-    case b
-      0 -> 
-        "no way"
-      _ -> 
-        a / b
-    end
   end
 end
