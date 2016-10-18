@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :todos, Todos.Repo,
   adapter: Ecto.Adapters.MySQL,
-  username: "phoenix",
-  password: "",
-  database: "todos_test",
-  hostname: "127.0.0.1",
+  username: System.get_env("DB_USER") || "phoenix",
+  password: System.get_env("DB_PASSWORD") || "",
+  database: System.get_env("DB_DATABASE") || "todos_test",
+  hostname: System.get_env("DB_HOST") || "127.0.0.1",
   pool: Ecto.Adapters.SQL.Sandbox

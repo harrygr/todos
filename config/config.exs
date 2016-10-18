@@ -22,6 +22,15 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure your database
+config :todos, Todos.Repo,
+  adapter: Ecto.Adapters.MySQL,
+  username: System.get_env("DB_USER") || "phoenix",
+  password: System.get_env("DB_PASSWORD") || "",
+  database: System.get_env("DB_DATABASE") || "todos_test",
+  hostname: System.get_env("DB_HOST") || "127.0.0.1",
+  pool: Ecto.Adapters.SQL.Sandbox
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
