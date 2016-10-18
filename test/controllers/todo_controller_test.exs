@@ -20,4 +20,17 @@ defmodule Todos.TodoControllerTest do
 
     assert json_response(conn, 200) == render_json(TodoView, "show.json", todo: todo)
   end
+
+  test "#create adds a new todo" do
+    todo = %{title: "Do some shizz", description: "This is required in order to profit"}
+
+    conn = post build_conn(), "/api/todos", todo
+
+    response = json_response(conn, :created) |> Poison.encode! |> Poison.decode!
+
+    %{"title" => returned_title, "description" => returned_description} = response
+
+    assert todo == %{title: returned_title, description: returned_description}
+
+  end
 end

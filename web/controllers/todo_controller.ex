@@ -12,4 +12,15 @@ defmodule Todos.TodoController do
     todo = Repo.get!(Todo, id)
     render conn, "show.json", todo: todo
   end
+
+  def create(conn, params) do
+    changeset = Todo.changeset(%Todo{}, params)
+
+    case Repo.insert(changeset) do
+      {:ok, todo} -> 
+        conn
+        |> put_status(:created) 
+        |> render("show.json", todo: todo)
+    end
+  end
 end
