@@ -12,7 +12,7 @@ config :todos,
 # Configures the endpoint
 config :todos, Todos.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "fa9dh8LSbRjl0Sb8hZFxSFgNhXPUNvXjfUmDrOXfHoVXdm48SmUhU9pcTGjrcbxk",
+  secret_key_base: System.get_env("APP_SECRET") || "fa9dh8LSbRjl0Sb8hZFxSFgNhXPUNvXjfUmDrOXfHoVXdm48SmUhU9pcTGjrcbxk",
   render_errors: [view: Todos.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Todos.PubSub,
            adapter: Phoenix.PubSub.PG2]
